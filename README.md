@@ -1,0 +1,1 @@
+# hicarenet_coding_test
