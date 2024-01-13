@@ -1,22 +1,19 @@
 package net.hicare.hicaretest
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.ejlim.data.model.response.Facility
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import net.hicare.hicaretest.adapters.FacilityAdapter
 import net.hicare.hicaretest.databinding.FragmentSecondBinding
@@ -48,9 +45,9 @@ class SecondFragment : Fragment() {
         initView()
         initObserver()
 
-        binding.btnGoFristFragment.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }
+//        binding.btnGoFristFragment.setOnClickListener {
+//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+//        }
     }
 
     private fun initView(){
@@ -67,6 +64,7 @@ class SecondFragment : Fragment() {
 
             btnSync.setOnClickListener {
                 viewModel.saveFacilityToDatabase()
+                Toast.makeText(requireContext(), R.string.msg_save_facility_success, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -97,6 +95,12 @@ class SecondFragment : Fragment() {
                launch {
                    viewModel.toastMsg.collectLatest { msg ->
                        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                   }
+               }
+
+               launch {
+                   viewModel.savedFacility.collectLatest { list ->
+                       binding.txtSearchedFacilityName.text = list.map { it.facilityName }.toString()
                    }
                }
            }

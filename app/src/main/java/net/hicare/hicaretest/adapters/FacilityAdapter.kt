@@ -2,11 +2,9 @@ package net.hicare.hicaretest.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.ejlim.data.model.response.Facility
+import com.ejlim.data.database.entity.Facility
 import net.hicare.hicaretest.databinding.ListitemFacilityBinding
 
 class FacilityAdapter(

@@ -9,17 +9,26 @@
             type="net.hicare.hicaretest.SecondViewModel" />
     </data>
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".SecondFragment">
+        tools:context=".SecondFragment"
+        android:fillViewport="true">
 
-        <Button
-            android:id="@+id/btn_go_frist_fragment"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="go first fragment"/>
+            android:text="saved facility name list..."/>
+
+        <TextView
+            android:id="@+id/txt_searched_facility_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,6 +68,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"/>
-    </LinearLayout>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </layout>
 
