@@ -1,6 +1,7 @@
 package com.ejlim.data.di
 
 import com.ejlim.data.BuildConfig
+import com.ejlim.data.datasource.FacilityDataSource
 import com.ejlim.data.repository.FacilityRepository
 import com.ejlim.data.service.FacilityService
 import dagger.Module
@@ -42,5 +43,8 @@ class ApiModule {
     }
 
     @Provides
-    fun provideMainRepository(apiService:FacilityService) = FacilityRepository(apiService)
+    fun provideFacilityRepository(facilityDatasource:FacilityDataSource) = FacilityRepository(facilityDatasource)
+
+    @Provides
+    fun provideFacilityDatasource(apiService:FacilityService) = FacilityDataSource(apiService)
 }

@@ -1,40 +1,106 @@
 package net.hicare.hicaretest
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.ejlim.data.model.response.Facility
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
+import net.hicare.hicaretest.adapters.FacilityAdapter
 import net.hicare.hicaretest.databinding.FragmentSecondBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
+@AndroidEntryPoint
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+
+    private val viewModel: SecondViewModel by viewModels()
+
+    private lateinit var facilityListAdapter: FacilityAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
+    ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
+        initView()
+        initObserver()
+
+        binding.btnGoFristFragment.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
+    }
+
+    private fun initView(){
+        with(binding){
+            vm = viewModel
+            lifecycleOwner = this@SecondFragment
+
+            //Facility List setting
+            listFacility.layoutManager = LinearLayoutManager(requireContext())
+            facilityListAdapter = FacilityAdapter { clickedFacility ->
+                viewModel.setSelectedFacility(clickedFacility)
+            }
+            listFacility.adapter = facilityListAdapter
+
+            btnSync.setOnClickListener {
+                viewModel.saveFacilityToDatabase()
+            }
+        }
+    }
+
+    private fun initObserver(){
+       viewLifecycleOwner.lifecycleScope.launch {
+           viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+               launch {
+                   viewModel.searchedFacilityList.collectLatest { facilityList ->
+                       //검색 결과를 adapter에 전달
+                       facilityListAdapter.facilityList = facilityList
+                       facilityListAdapter.notifyDataSetChanged()
+
+                       //검색 내용이 변경되었으므로 선택한 시설 제거
+                       viewModel.setSelectedFacility(null)
+                   }
+               }
+
+               launch {
+                   viewModel.selectedFacility
+                       .collectLatest { selectedFacility ->
+                           //클릭한 시설 명 표시
+                           val text = selectedFacility?.facilityName ?: getString(R.string.default_selected_facility)
+                           binding.textSelectedFacility.text = text
+                   }
+               }
+
+               launch {
+                   viewModel.toastMsg.collectLatest { msg ->
+                       Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                   }
+               }
+           }
+       }
     }
 
     override fun onDestroyView() {
