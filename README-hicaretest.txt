@@ -6,10 +6,11 @@ project의 구조에 대한 이해도와 요구사항의 내용을 코드로 옮
   [요구사항]
   @res/drawable/sync-page.png
 
-  1. sync 버튼 선택 시 선택 된 시설 명, logo(이미지)로 이루어진 시설명 list 를 다운로드 합니다.
+  1. 페이지 진입 시 시설 명, logo(이미지)로 이루어진 시설명 list 를 다운로드 합니다.
   2. 다운로드 시 변경된 정보가 있으면 업데이트
   3. 실패 시 err  msg 출력
-  4. 성공시 'Register a New Facility'의 상태 값을 시설명으로 변경 합니다.
+  4. 리스트에서 시설명 선택 후 'sync' 버튼 클릭 시 시설명을 저장합니다.
+  5. sync 성공시 'Register a New Facility'의 상태 값을 시설명으로 변경 합니다.
 
 서버 주소 https://hicare.net/all/facility
 get type
