@@ -44,10 +44,6 @@ class SecondFragment : Fragment() {
 
         initView()
         initObserver()
-
-//        binding.btnGoFristFragment.setOnClickListener {
-//            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-//        }
     }
 
     private fun initView(){

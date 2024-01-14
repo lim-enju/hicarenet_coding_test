@@ -3,6 +3,8 @@ package net.hicare.hicaretest
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ejlim.data.database.entity.Facility
+import com.ejlim.data.network.onFailure
+import com.ejlim.data.network.onSuccess
 import com.ejlim.data.repository.FacilityRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -38,23 +40,26 @@ class SecondViewModel @Inject constructor(
     val searchedFacilityList = queryString
         .debounce(300)
         .flatMapLatest { query ->
-            flow {
+            flow <List<Facility>>{
                 //빈 문자를 검색한 경우
                 if (query.isBlank()) {
                     emit(listOf())
                     return@flow
                 }
-                val result = repository.searchFacility(query)
-                emit(result)
-
-                //TODO:: error handling 필요
-                if (result == null) {
-                    _toastMsg.emit("에러났어요")
-                }
+                repository.searchFacility(query)
+                    .onSuccess { facilityList ->
+                        //검색 성공 시 list update
+                        emit(facilityList?: listOf())
+                    }
+                    .onFailure { _, msg ->
+                        //검색 실패 시 메시지 출력
+                        _toastMsg.emit(msg)
+                    }
             }
         }
 
 
+    //Facility 리스트 중 한개를 선택한 경우 setting
     fun setSelectedFacility(facility: Facility?) {
         viewModelScope.launch(Dispatchers.IO) {
             _selectedFacility.emit(facility)
