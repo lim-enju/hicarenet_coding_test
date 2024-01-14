@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.ejlim.data.BuildConfig
 import com.ejlim.data.database.AppDatabase
 import com.ejlim.data.datasource.FacilityDataSource
+import com.ejlim.data.network.NetworkResponseAdapterFactory
 import com.ejlim.data.repository.FacilityRepository
 import com.ejlim.data.service.FacilityService
 import dagger.Module
@@ -50,6 +51,7 @@ class ApiModule {
         return Retrofit.Builder()
             .client(okHttpClient)
             .baseUrl(BuildConfig.BASE_URL)
+            .addCallAdapterFactory(NetworkResponseAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
