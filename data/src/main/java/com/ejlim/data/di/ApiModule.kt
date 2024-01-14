@@ -1,10 +1,12 @@
 package com.ejlim.data.di
 
 import android.content.Context
+import androidx.room.Database
 import androidx.room.Room
 import com.ejlim.data.BuildConfig
 import com.ejlim.data.database.AppDatabase
-import com.ejlim.data.datasource.FacilityDataSource
+import com.ejlim.data.datasource.FacilityLocalDataSource
+import com.ejlim.data.datasource.FacilityRemoteDataSource
 import com.ejlim.data.network.NetworkResponseAdapterFactory
 import com.ejlim.data.repository.FacilityRepository
 import com.ejlim.data.service.FacilityService
@@ -62,9 +64,12 @@ class ApiModule {
     }
 
     @Provides
-    fun provideFacilityRepository(facilityDatasource: FacilityDataSource, database: AppDatabase)
-        = FacilityRepository(facilityDatasource, database)
+    fun provideFacilityRepository(facilityRemoteDatasource: FacilityRemoteDataSource, facilityLocalDataSource: FacilityLocalDataSource)
+        = FacilityRepository(facilityRemoteDatasource, facilityLocalDataSource)
 
     @Provides
-    fun provideFacilityDatasource(apiService: FacilityService) = FacilityDataSource(apiService)
+    fun provideFacilityDatasource(apiService: FacilityService) = FacilityRemoteDataSource(apiService)
+
+    @Provides
+    fun provideFacilityLocalDatasource(database: AppDatabase) = FacilityLocalDataSource(database)
 }

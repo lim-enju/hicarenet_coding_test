@@ -8,7 +8,7 @@ import com.ejlim.data.service.FacilityService
 import javax.inject.Inject
 import kotlin.random.Random
 
-class FacilityDataSource @Inject constructor(
+class FacilityRemoteDataSource @Inject constructor(
     private val facilityService: FacilityService
 ){
     fun searchFacility(query: String): NetworkResponse<FacilityListResponse> {
