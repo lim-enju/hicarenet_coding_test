@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import net.hicare.hicaretest.GetEvenNum.getOnlyEvenNum
 import net.hicare.hicaretest.databinding.FragmentFirstBinding
+import kotlin.random.Random
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -34,6 +36,17 @@ class FirstFragment : Fragment() {
 
         binding.buttonFirst.setOnClickListener {
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+        }
+
+        initView()
+    }
+
+    private fun initView(){
+        repeat(5){
+            val originList = List(5) { Random.nextInt(100) }
+            val evenList = originList.getOnlyEvenNum()
+
+            binding.txtEvenList.text = "${binding.txtEvenList.text} origin: $originList \n filter even $evenList \n\n\n"
         }
     }
 

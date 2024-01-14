@@ -5,5 +5,9 @@ package net.hicare.hicaretest
  * val numbers = listOf(1,2,3,4,5)
  */
 
-class GetEvenNum {
+object GetEvenNum {
+    // 함수 참조를 사용하여 짝수를 구하는 함수
+    private fun isEven(number: Int): Boolean = number % 2 == 0
+
+    fun List<Int>.getOnlyEvenNum() = filter(::isEven)
 }
