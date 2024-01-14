@@ -1,4 +1,4 @@
-package com.ejlim.data.network
+package com.ejlim.data.model
 
 data class BaseResponse<T> (
     val statusCode:Int,

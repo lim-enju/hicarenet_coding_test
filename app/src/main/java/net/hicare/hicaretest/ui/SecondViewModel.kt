@@ -1,13 +1,15 @@
-package net.hicare.hicaretest
+package net.hicare.hicaretest.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ejlim.data.database.entity.Facility
-import com.ejlim.data.network.onFailure
-import com.ejlim.data.network.onSuccess
+import com.ejlim.data.model.onFailure
+import com.ejlim.data.model.onSuccess
 import com.ejlim.data.repository.FacilityRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -37,6 +39,7 @@ class SecondViewModel @Inject constructor(
             .getAllFacility()
             .flowOn(Dispatchers.IO)
 
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val searchedFacilityList = queryString
         .debounce(300)
         .flatMapLatest { query ->
@@ -53,6 +56,7 @@ class SecondViewModel @Inject constructor(
                     }
                     .onFailure { _, msg ->
                         //검색 실패 시 메시지 출력
+                        emit(listOf())
                         _toastMsg.emit(msg)
                     }
             }

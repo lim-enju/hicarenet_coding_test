@@ -13,5 +13,5 @@ interface FacilityDao {
     fun getAllFacility(): Flow<List<Facility>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFacility(facility: Facility)
+    fun insertFacility(facility: Facility)
 }

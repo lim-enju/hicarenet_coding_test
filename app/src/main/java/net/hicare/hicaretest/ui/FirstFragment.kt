@@ -1,4 +1,4 @@
-package net.hicare.hicaretest
+package net.hicare.hicaretest.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import net.hicare.hicaretest.GetEvenNum.getOnlyEvenNum
+import net.hicare.hicaretest.util.GetEvenNum.getOnlyEvenNum
+import net.hicare.hicaretest.R
 import net.hicare.hicaretest.databinding.FragmentFirstBinding
 import kotlin.random.Random
 

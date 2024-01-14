@@ -1,4 +1,4 @@
-package com.ejlim.data.network
+package com.ejlim.data.model
 
 import java.io.IOException
 

@@ -1,5 +1,6 @@
 package com.ejlim.data.network
 
+import com.ejlim.data.model.NetworkResponse
 import retrofit2.Call
 import retrofit2.CallAdapter
 import java.lang.reflect.Type

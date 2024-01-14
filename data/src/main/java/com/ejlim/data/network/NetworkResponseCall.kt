@@ -4,6 +4,8 @@ import com.ejlim.data.Constants.API_ERROR
 import com.ejlim.data.Constants.COMMON_RESULT_FAIL_ERROR
 import com.ejlim.data.Constants.NULL_BODY_ERROR
 import com.ejlim.data.Constants.UNKNOWN_ERROR
+import com.ejlim.data.model.BaseResponse
+import com.ejlim.data.model.NetworkResponse
 import okhttp3.Request
 import okio.IOException
 import okio.Timeout

@@ -1,7 +1,7 @@
 package com.ejlim.data.service
 
 import com.ejlim.data.model.response.FacilityListResponse
-import com.ejlim.data.network.NetworkResponse
+import com.ejlim.data.model.NetworkResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -6,13 +6,13 @@
     <data>
         <variable
             name="vm"
-            type="net.hicare.hicaretest.SecondViewModel" />
+            type="net.hicare.hicaretest.ui.SecondViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SecondFragment"
+        tools:context=".ui.SecondFragment"
         android:fillViewport="true">
 
         <LinearLayout

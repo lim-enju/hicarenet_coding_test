@@ -1,4 +1,4 @@
-package net.hicare.hicaretest
+package net.hicare.hicaretest.util
 
 /**
  * 함수 참조를 사용하여 다음 list 에서 짝수를 구하는 함수를 구현 하시오.

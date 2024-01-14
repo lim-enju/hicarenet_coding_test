@@ -3,7 +3,7 @@ package com.ejlim.data.datasource
 import com.ejlim.data.BuildConfig
 import com.ejlim.data.model.response.FacilityItem
 import com.ejlim.data.model.response.FacilityListResponse
-import com.ejlim.data.network.NetworkResponse
+import com.ejlim.data.model.NetworkResponse
 import com.ejlim.data.service.FacilityService
 import javax.inject.Inject
 import kotlin.random.Random

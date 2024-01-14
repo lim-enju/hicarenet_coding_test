@@ -5,9 +5,7 @@ import com.ejlim.data.database.entity.Facility
 import com.ejlim.data.datasource.FacilityDataSource
 import com.ejlim.data.mapNetworkResponse
 import com.ejlim.data.mapper.toFacility
-import com.ejlim.data.network.NetworkResponse
-import com.ejlim.data.network.onFailure
-import com.ejlim.data.network.onSuccess
+import com.ejlim.data.model.NetworkResponse
 import javax.inject.Inject
 
 class FacilityRepository @Inject constructor(
@@ -24,7 +22,7 @@ class FacilityRepository @Inject constructor(
     }
 
     fun getAllFacility() = database.facilityDao().getAllFacility()
-    suspend fun insertFacility(facility: Facility){
+    fun insertFacility(facility: Facility) =
         database.facilityDao().insertFacility(facility)
-    }
+
 }

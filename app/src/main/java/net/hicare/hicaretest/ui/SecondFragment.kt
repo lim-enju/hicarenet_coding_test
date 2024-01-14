@@ -1,4 +1,4 @@
-package net.hicare.hicaretest
+package net.hicare.hicaretest.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import net.hicare.hicaretest.R
 import net.hicare.hicaretest.adapters.FacilityAdapter
 import net.hicare.hicaretest.databinding.FragmentSecondBinding
 

@@ -1,4 +1,4 @@
-package net.hicare.hicaretest
+package net.hicare.hicaretest.ui
 
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import dagger.hilt.android.AndroidEntryPoint
+import net.hicare.hicaretest.R
 import net.hicare.hicaretest.databinding.ActivityMainBinding
 
 @AndroidEntryPoint
