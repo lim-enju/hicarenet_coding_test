@@ -44,6 +44,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
 
+    <string name="text_selected_facility">선택된 시설: </string>
     <string name="default_selected_facility">시설을 선택해주세요...</string>
     <string name="msg_save_facility_success">저장이 완료되었습니다.</string>
 </resources>
